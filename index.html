@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Caption Generator - AI-Powered Captions</title>
+    <meta name="description" content="Generate engaging, contextual captions for social media posts in seconds. AI-powered creativity for Instagram, Twitter, LinkedIn, and TikTok.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+        
+        .btn-primary {
+            @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+        }
+        
+        .btn-secondary {
+            @apply bg-white hover:bg-gray-50 text-gray-700 font-medium py-3 px-6 rounded-lg border border-gray-300 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+        }
+        
+        .input-field {
+            @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200;
+        }
+        
+        .card {
+            @apply bg-white rounded-xl shadow-sm border border-gray-200 p-6;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #0ea5e9, #d946ef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .slide-up {
+            animation: slideUp 0.3s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { 
+                transform: translateY(10px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
+                        <i data-lucide="sparkles" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <span class="text-xl font-bold text-gray-900">CaptionAI</span>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-600 hover:text-gray-900 transition-colors">Home</a>
+                    <a href="#generate" class="text-gray-600 hover:text-gray-900 transition-colors">Generate</a>
+                    <a href="#pricing" class="text-gray-600 hover:text-gray-900 transition-colors">Pricing</a>
+                    <a href="#features" class="text-gray-600 hover:text-gray-900 transition-colors">Features</a>
+                </nav>
+
+                <!-- CTA Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#generate" class="btn-primary">Get Started</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2" onclick="toggleMobileMenu()">
+                    <i data-lucide="menu" class="w-6 h-6 text-gray-600"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden hidden py-4 border-t border-gray-200">
+                <nav class="flex flex-col space-y-4">
+                    <a href="#home" class="text-gray-600 hover:text-gray-900 transition-colors">Home</a>
+                    <a href="#generate" class="text-gray-600 hover:text-gray-900 transition-colors">Generate</a>
+                    <a href="#pricing" class="text-gray-600 hover:text-gray-900 transition-colors">Pricing</a>
+                    <a href="#features" class="text-gray-600 hover:text-gray-900 transition-colors">Features</a>
+                    <div class="pt-4 border-t border-gray-200">
+                        <a href="#generate" class="btn-primary inline-block w-full text-center">Get Started</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="py-20 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center">
+                <!-- Main Headline -->
+                <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                    Generate Engaging
+                    <span class="block gradient-text">
+                        Social Media Captions
+                    </span>
+                    in Seconds
+                </h1>
+                
+                <!-- Subtitle -->
+                <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+                    Never run out of caption ideas again. AI-powered creativity that saves time and 
+                    increases engagement across Instagram, Twitter, LinkedIn, and TikTok.
+                </p>
+                
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                    <a href="#generate" class="btn-primary text-lg px-8 py-4 inline-flex items-center justify-center">
+                        Start Generating Captions
+                        <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
+                    </a>
+                    <a href="#demo" class="btn-secondary text-lg px-8 py-4">Watch Demo</a>
+                </div>
+                
+                <!-- Social Proof -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-8 text-sm text-gray-500">
+                    <div class="flex items-center space-x-2">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-blue-500"></i>
+                        <span>10,000+ captions generated</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i data-lucide="zap" class="w-4 h-4 text-purple-500"></i>
+                        <span>3 seconds average generation</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i data-lucide="trending-up" class="w-4 h-4 text-green-500"></i>
+                        <span>40% increase in engagement</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Caption Generator Section -->
+    <section id="generate" class="py-20 px-4 bg-white">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    Generate Your Caption
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Describe your content, choose your style, and get AI-powered captions in seconds
+                </p>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Input Section -->
+                <div class="card">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-2">Describe Your Content</h3>
+                        <p class="text-gray-600">Tell us what you're posting about</p>
+                    </div>
+
+                    <textarea
+                        id="contentInput"
+                        placeholder="Describe your content, post, or what you want to share with your audience..."
+                        class="input-field h-32 resize-none"
+                    ></textarea>
+                </div>
+
+                <!-- Options Section -->
+                <div class="card">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-2">Customize Your Caption</h3>
+                        <p class="text-gray-600">Choose platform, tone, and style preferences</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Platform Selection -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Platform</label>
+                            <select id="platformSelect" class="input-field">
+                                <option value="instagram">Instagram</option>
+                                <option value="twitter">Twitter</option>
+                                <option value="linkedin">LinkedIn</option>
+                                <option value="tiktok">TikTok</option>
+                                <option value="facebook">Facebook</option>
+                            </select>
+                        </div>
+
+                        <!-- Tone Selection -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Tone</label>
+                            <select id="toneSelect" class="input-field">
+                                <option value="casual">Casual & Friendly</option>
+                                <option value="professional">Professional</option>
+                                <option value="witty">Witty & Humorous</option>
+                                <option value="inspirational">Inspirational</option>
+                                <option value="promotional">Promotional</option>
+                                <option value="storytelling">Storytelling</option>
+                            </select>
+                        </div>
+
+                        <!-- Length Selection -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Length</label>
+                            <select id="lengthSelect" class="input-field">
+                                <option value="short">Short (1-2 sentences)</option>
+                                <option value="medium">Medium (3-4 sentences)</option>
+                                <option value="long">Long (paragraph+)</option>
+                            </select>
+                        </div>
+
+                        <!-- Additional Options -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Options</label>
+                            <div class="space-y-3">
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="includeHashtags" checked class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="ml-2 text-sm text-gray-700">Include hashtags</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="includeEmojis" checked class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                    <span class="ml-2 text-sm text-gray-700">Include emojis</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Generate Button -->
+                <div class="text-center">
+                    <button
+                        onclick="generateCaptions()"
+                        id="generateBtn"
+                        class="btn-primary text-lg px-12 py-4"
+                    >
+                        <i data-lucide="sparkles" class="w-5 h-5 mr-2 inline"></i>
+                        Generate Captions
+                    </button>
+                </div>
+
+                <!-- Results Section -->
+                <div id="resultsSection" class="card hidden">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-900">Generated Captions</h3>
+                        <button
+                            onclick="regenerateCaptions()"
+                            class="btn-secondary inline-flex items-center"
+                        >
+                            <i data-lucide="refresh-cw" class="w-4 h-4 mr-2"></i>
+                            Regenerate
+                        </button>
+                    </div>
+
+                    <div id="captionsContainer" class="space-y-4">
+                        <!-- Captions will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    Everything You Need for
+                    <span class="block gradient-text">
+                        Social Media Success
+                    </span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Our AI-powered platform combines cutting-edge technology with social media expertise 
+                    to deliver captions that actually work.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card hover:shadow-lg transition-shadow duration-300 group">
+                    <div class="mb-4">
+                        <i data-lucide="instagram" class="w-8 h-8 text-pink-500"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
+                        Multi-Platform Support
+                    </h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Generate captions optimized for Instagram, Twitter, LinkedIn, TikTok, and more. Each platform gets tailored content that follows best practices.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">Instagram</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">Twitter</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">LinkedIn</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">TikTok</span>
+                    </div>
+                </div>
+
+                <div class="card hover:shadow-lg transition-shadow duration-300 group">
+                    <div class="mb-4">
+                        <i data-lucide="palette" class="w-8 h-8 text-purple-500"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
+                        Tone & Style Options
+                    </h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Choose from professional, casual, witty, inspirational, or promotional tones. Customize length and style to match your brand voice.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">Professional</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">Casual</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">Witty</span>
+                    </div>
+                </div>
+
+                <div class="card hover:shadow-lg transition-shadow duration-300 group">
+                    <div class="mb-4">
+                        <i data-lucide="hash" class="w-8 h-8 text-blue-500"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
+                        Smart Hashtag Generation
+                    </h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        AI-powered hashtag suggestions that are relevant to your content and trending in your niche. Boost discoverability automatically.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">Trending hashtags</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">Niche-specific</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">Engagement optimized</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 px-4 bg-white">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                    Simple, Transparent
+                    <span class="block gradient-text">
+                        Pricing
+                    </span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Choose the plan that fits your needs. Start free and upgrade anytime.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card hover:shadow-lg transition-shadow">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Free</h3>
+                        <div class="mb-4">
+                            <span class="text-4xl font-bold text-gray-900">$0</span>
+                            <span class="text-gray-600 ml-2">forever</span>
+                        </div>
+                        <p class="text-gray-600">Perfect for getting started with AI caption generation</p>
+                    </div>
+
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <i data-lucide="check" class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0"></i>
+                            <span class="text-gray-700">10 captions per day</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="check" class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0"></i>
+                            <span class="text-gray-700">Basic customization options</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="check" class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0"></i>
+                            <span class="text-gray-700">Instagram & Twitter support</span>
+                        </li>
+                    </ul>
+
+                    <a href="#generate" class="btn-secondary block w-full text-center py-3 px-6 rounded-lg font-medium transition-colors">
+                        Get Started Free
+                    </a>
+                </div>
+
+                <div class="card ring-2 ring-blue-500 shadow-xl scale-105 relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium flex items-center">
+                            <i data-lucide="star" class="w-4 h-4 mr-1"></i>
+                            Most Popular
+                        </span>
+                    </div>
+
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Pro</h3>
+                        <div class="mb-4">
+                            <span class="text-4xl font-bold text-gray-900">$9</span>
+                            <span class="text-gray-600 ml-2">per month</span>
+                        </div>
+                        <p class="text-gray-600">For content creators and small businesses</p>
+                    </div>
+
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <i data-lucide="check" class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0"></i>
+                            <span class="text-gray-700">Unlimited captions</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="check" class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0"></i>
+                            <span class="text-gray-700">All platforms supported</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="check" class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0"></i>
+                            <span class="text-gray-700">Advanced customization</span>
+                        </li>
+                    </ul>
+
+                    <a href="#generate" class="btn-primary block w-full text-center py-3 px-6 rounded-lg font-medium transition-colors">
+                        Start Pro Trial
+                    </a>
+                </div>
+
+                <div class="card hover:shadow-lg transition-shadow">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Business</h3>
+                        <div class="mb-4">
+                            <span class="text-4xl font-bold text-gray-900">$29</span>
+                            <span class="text-gray-600 ml-2">per month</span>
+                        </div>
+                        <p class="text-gray-600">For teams and agencies</p>
+                    </div>
+
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <i data-lucide="check" class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0"></i>
+                            <span class="text-gray-700">Everything in Pro</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="check" class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0"></i>
+                            <span class="text-gray-700">Team collaboration</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="check" class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0"></i>
+                            <span class="text-gray-700">Brand voice profiles</span>
+                        </li>
+                    </ul>
+
+                    <a href="#generate" class="btn-secondary block w-full text-center py-3 px-6 rounded-lg font-medium transition-colors">
+                        Contact Sales
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Brand Section -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
+                            <i data-lucide="sparkles" class="w-5 h-5 text-white"></i>
+                        </div>
+                        <span class="text-xl font-bold">CaptionAI</span>
+                    </div>
+                    <p class="text-gray-300 mb-6 max-w-md">
+                        AI-powered social media caption generator that helps creators, marketers, and businesses 
+                        create engaging content in seconds.
+                    </p>
+                </div>
+
+                <!-- Product Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Product</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#generate" class="text-gray-300 hover:text-white transition-colors">Generate Captions</a></li>
+                        <li><a href="#pricing" class="text-gray-300 hover:text-white transition-colors">Pricing</a></li>
+                        <li><a href="#features" class="text-gray-300 hover:text-white transition-colors">Features</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-300 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#pricing" class="text-gray-300 hover:text-white transition-colors">Pricing</a></li>
+                        <li><a href="#contact" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <div class="text-gray-400 text-sm">
+                    © 2024 CaptionAI. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Caption generation logic
+        function generateCaptions() {
+            const content = document.getElementById('contentInput').value.trim();
+            if (!content) {
+                alert('Please describe your content first');
+                return;
+            }
+
+            const platform = document.getElementById('platformSelect').value;
+            const tone = document.getElementById('toneSelect').value;
+            const length = document.getElementById('lengthSelect').value;
+            const includeHashtags = document.getElementById('includeHashtags').checked;
+            const includeEmojis = document.getElementById('includeEmojis').checked;
+
+            // Show loading state
+            const generateBtn = document.getElementById('generateBtn');
+            const originalText = generateBtn.innerHTML;
+            generateBtn.innerHTML = '<i data-lucide="refresh-cw" class="w-5 h-5 mr-2 animate-spin inline"></i>Generating...';
+            generateBtn.disabled = true;
+
+            // Simulate API call
+            setTimeout(() => {
+                const captions = generateMockCaptions(content, platform, tone, length, includeHashtags, includeEmojis);
+                displayCaptions(captions);
+                
+                // Reset button
+                generateBtn.innerHTML = originalText;
+                generateBtn.disabled = false;
+                
+                // Re-initialize icons
+                lucide.createIcons();
+            }, 2000);
+        }
+
+        function generateMockCaptions(content, platform, tone, length, includeHashtags, includeEmojis) {
+            const emojis = includeEmojis ? ['✨', '💫', '🌟', '🔥', '💯', '🎯', '🚀', '💪', '❤️', '😊'] : [];
+            const emoji = includeEmojis ? emojis[Math.floor(Math.random() * emojis.length)] : '';
+            
+            const baseText = `This is a ${tone} caption about ${content} for ${platform}. `;
+            
+            let captionText = '';
+            switch (length) {
+                case 'short':
+                    captionText = `${emoji} ${baseText} Perfect for quick engagement!`;
+                    break;
+                case 'medium':
+                    captionText = `${emoji} ${baseText} It's designed to capture attention and encourage interaction from your audience.`;
+                    break;
+                case 'long':
+                    captionText = `${emoji} ${baseText} This longer format allows you to tell a more complete story, share valuable insights, and create deeper connections with your followers. It's perfect for when you want to provide real value and establish thought leadership.`;
+                    break;
+                default:
+                    captionText = `${emoji} ${baseText}`;
+            }
+
+            const hashtags = includeHashtags ? generateMockHashtags(content, platform) : [];
+
+            return [
+                { text: captionText, hashtags: hashtags, isFavorite: false },
+                { text: captionText, hashtags: hashtags, isFavorite: false },
+                { text: captionText, hashtags: hashtags, isFavorite: false }
+            ];
+        }
+
+        function generateMockHashtags(content, platform) {
+            const commonHashtags = ['#socialmedia', '#content', '#marketing', '#digital', '#growth'];
+            const platformHashtags = {
+                instagram: ['#instagram', '#instagood', '#photooftheday'],
+                twitter: ['#twitter', '#tweeting', '#social'],
+                linkedin: ['#linkedin', '#professional', '#business'],
+                tiktok: ['#tiktok', '#viral', '#trending'],
+                facebook: ['#facebook', '#social', '#community']
+            };
+            
+            const platformSpecific = platformHashtags[platform] || [];
+            const contentHashtags = content.split(' ').slice(0, 3).map(word => `#${word.toLowerCase()}`);
+            
+            return [...contentHashtags, ...platformSpecific, ...commonHashtags].slice(0, 8);
+        }
+
+        function displayCaptions(captions) {
+            const resultsSection = document.getElementById('resultsSection');
+            const captionsContainer = document.getElementById('captionsContainer');
+            
+            captionsContainer.innerHTML = '';
+            
+            captions.forEach((caption, index) => {
+                const captionElement = document.createElement('div');
+                captionElement.className = 'border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors';
+                captionElement.innerHTML = `
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm font-medium text-gray-500">Option ${index + 1}</span>
+                            <span class="text-xs text-gray-400">${caption.text.length} characters</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="toggleFavorite(${index})" class="p-2 text-gray-400 hover:text-gray-600 rounded-lg transition-colors">
+                                <i data-lucide="heart" class="w-4 h-4"></i>
+                            </button>
+                            <button onclick="copyCaption(${index})" class="p-2 text-gray-400 hover:text-gray-600 rounded-lg transition-colors">
+                                <i data-lucide="copy" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <p class="text-gray-900 leading-relaxed mb-3">${caption.text}</p>
+                    ${caption.hashtags.length > 0 ? `
+                        <div class="flex flex-wrap gap-2">
+                            ${caption.hashtags.map(hashtag => `<span class="px-2 py-1 bg-blue-100 text-blue-700 text-sm rounded-full">${hashtag}</span>`).join('')}
+                        </div>
+                    ` : ''}
+                `;
+                
+                captionsContainer.appendChild(captionElement);
+            });
+            
+            resultsSection.classList.remove('hidden');
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+            
+            // Re-initialize icons
+            lucide.createIcons();
+        }
+
+        function regenerateCaptions() {
+            generateCaptions();
+        }
+
+        function toggleFavorite(index) {
+            // Toggle favorite state (in a real app, this would update the store)
+            const heartIcon = event.target.closest('button').querySelector('i');
+            if (heartIcon.style.color === 'red') {
+                heartIcon.style.color = '';
+            } else {
+                heartIcon.style.color = 'red';
+            }
+        }
+
+        function copyCaption(index) {
+            const captionText = document.querySelectorAll('#captionsContainer .text-gray-900')[index].textContent;
+            navigator.clipboard.writeText(captionText).then(() => {
+                alert('Caption copied to clipboard!');
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = captionText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                alert('Caption copied to clipboard!');
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
